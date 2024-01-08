@@ -1,60 +1,87 @@
 import java.util.Scanner;
 
 public class Main {
-    public static void addition(double num1, double num2) {
-        System.out.println(num1+num2);
+    public static double addition(double numberOne, double numberTwo) {
+
+        return numberOne + numberTwo;
     }
 
-    public static void subtract(double num1, double num2) {
-        System.out.println(num1-num2);
+    public static double subtract(double numberOne, double numberTwo) {
+
+        return numberOne - numberTwo;
     }
 
-    public static void multiply(double num1, double num2) {
-        System.out.println(num1*num2);
+    public static double multiply(double numberOne, double numberTwo) {
+
+        return numberOne * numberTwo;
     }
 
-    public static void divide(double num1, double num2) {
-        System.out.println(num1/num2);
+    public static double divide(double numberOne, double numberTwo) {
+
+        return numberOne / numberTwo;
+    }
+
+    public static double calculations(String equation, double numberOne, double numberTwo ) {
+
+        switch (equation) {
+            case "+":
+                numberOne = addition(numberOne, numberTwo);
+                break;
+            case "-":
+                numberOne = subtract(numberOne, numberTwo);
+                break;
+            case "*":
+                numberOne = multiply(numberOne, numberTwo);
+                break;
+            case "/":
+                numberOne = divide(numberOne, numberTwo);
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + equation);
+        }
+
+        return numberOne;
     }
 
     public static void main(String[] args) {
         Scanner scnr = new Scanner(System.in);
-        double firstNum;
-        double secondNum;
+        double calcNumTwo;
         String parameter;
+        String needComplexNum;
+        double currentTotal;
 
-        System.out.println("Please enter your first number: ");
-        firstNum = scnr.nextDouble();
+        System.out.println("Are you needing a complex number? (eg. square root): Yes/No");
+        needComplexNum = scnr.nextLine().toLowerCase();
 
-        System.out.println("Please enter your second number: ");
-        secondNum = scnr.nextDouble();
+        if (needComplexNum.equals("yes")) {
+            System.out.println("System is not ready for this yet.");
 
-        System.out.println("What would you like to do with these numbers? (+ - * /): ");
-        parameter = scnr.next();
+        } else {
 
-        if (parameter.equals("+")) {
-            parameter = "add";
-        } else if (parameter.equals("-")) {
-            parameter = "sub";
-        }else if (parameter.equals("*")) {
-            parameter = "mult";
-        }else if (parameter.equals("/")) {
-            parameter = "div";
-        }
+            boolean needMore = true;
 
-        switch (parameter) {
-            case "add":
-                addition(firstNum,secondNum);
-                break;
-            case "sub":
-                subtract(firstNum,secondNum);
-                break;
-            case "mult":
-                multiply(firstNum,secondNum);
-                break;
-            case "div":
-                divide(firstNum,secondNum);
-                break;
+            System.out.println("Please enter your number: ");
+            currentTotal = scnr.nextDouble();
+
+            while (needMore) {
+
+                System.out.println("What would you like to do with these numbers? (+ - * /): ");
+                parameter = scnr.next();
+
+                System.out.println("Please enter your number: ");
+                calcNumTwo = scnr.nextDouble();
+
+                currentTotal = calculations(parameter, currentTotal, calcNumTwo);
+
+                System.out.println("Current total = " + currentTotal);
+
+                System.out.println("Do you need more numbers? (Yes/No)");
+                if (scnr.next().equalsIgnoreCase("no")) {
+                    needMore = false;
+                }
+            }
         }
     }
 }
+
+
