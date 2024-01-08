@@ -21,32 +21,29 @@ public class Main {
         return numberOne / numberTwo;
     }
 
-    public static double calculations(String equation, double numberOne, double numberTwo ) {
+    public static double calculations(char equation, double numberOne, double numberTwo ) {
 
         switch (equation) {
-            case "+":
+            case '+':
                 numberOne = addition(numberOne, numberTwo);
                 break;
-            case "-":
+            case '-':
                 numberOne = subtract(numberOne, numberTwo);
                 break;
-            case "*":
+            case '*':
                 numberOne = multiply(numberOne, numberTwo);
                 break;
-            case "/":
+            case '/':
                 numberOne = divide(numberOne, numberTwo);
                 break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + equation);
         }
-
         return numberOne;
     }
 
     public static void main(String[] args) {
         Scanner scnr = new Scanner(System.in);
         double calcNumTwo;
-        String parameter;
+        char parameter = ' ';
         String needComplexNum;
         double currentTotal;
 
@@ -64,10 +61,15 @@ public class Main {
             currentTotal = scnr.nextDouble();
 
             while (needMore) {
+                boolean parameterTrue = false;
+                while (!parameterTrue) {
+                    System.out.println("What would you like to do with these numbers? (+ - * /): ");
+                    parameter = scnr.next().charAt(0);
 
-                System.out.println("What would you like to do with these numbers? (+ - * /): ");
-                parameter = scnr.next();
-
+                    if (parameter == '+' || parameter == '-' || parameter == '*' || parameter == '/') {
+                        parameterTrue = true;
+                    }
+                }
                 System.out.println("Please enter your number: ");
                 calcNumTwo = scnr.nextDouble();
 
