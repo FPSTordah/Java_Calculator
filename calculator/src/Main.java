@@ -44,6 +44,55 @@ public class Main {
         return Math.pow(baseNumber, ofPower);
     }
 
+    public static void quadraticFormula(Scanner scnr) {
+        double a;
+        double b;
+        double c;
+        double xOne;
+        double xTwo;
+
+        System.out.println("Please enter value for \"A\": ");
+        a = scnr.nextDouble();
+
+        System.out.println("Please enter value for \"B\": ");
+        b = scnr.nextDouble();
+
+        System.out.println("Please enter value for \"C\": ");
+        c = scnr.nextDouble();
+
+        xOne = quadraticFormulaTopEquationPlus(a, b, c) / (2 * a);
+        xTwo = quadraticFormulaTopEquationNegative(a, b, c)  / (2 * a);
+
+        System.out.println("x\u2081 = " + xOne);
+        System.out.println("x\u2082 = " + xTwo);
+    }
+
+    public static double quadraticFormulaTopEquationPlus(double a, double b, double c) {
+        double firstHalf;
+        double secondHalf;
+        double totalPlus;
+
+        firstHalf = (b * -1);
+        secondHalf = Math.sqrt((b*b) - (4* a * c));
+
+        totalPlus = firstHalf + secondHalf;
+
+        return totalPlus;
+    }
+
+    public static double quadraticFormulaTopEquationNegative(double a, double b, double c) {
+        double firstHalf;
+        double secondHalf;
+        double totalNegative;
+
+        firstHalf = (b * -1);
+        secondHalf = Math.sqrt((b*b) - (4* a * c));
+
+        totalNegative = firstHalf - secondHalf;
+
+        return totalNegative;
+    }
+
     public static double calculations(char equation, double numberOne, double numberTwo ) {
 
         switch (equation) {
@@ -75,8 +124,8 @@ public class Main {
 
         if (needComplexNum.equals("yes")) {
             String complexProcess;
-            System.out.println("Currently square root and \"power of\" is available (sqrt & powr): ");
-            complexProcess = scnr.nextLine();
+            System.out.println("Currently square root and \"power of\" is available (sqrt / powr / quadratic): ");
+            complexProcess = scnr.nextLine().toLowerCase();
 
             switch (complexProcess) {
                 case "sqrt":
@@ -85,6 +134,8 @@ public class Main {
                 case "powr":
                     System.out.println("Total is: " + powerOf(scnr));
                     break;
+                case "quadratic":
+                    quadraticFormula(scnr);
                 }
         } else {
 
