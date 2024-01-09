@@ -31,6 +31,20 @@ public class Main {
         return Math.sqrt(numberToSquare);
     }
 
+//    public static double rootNumber(Scanner scnr) {
+//
+//        int numberToSquare;
+//        int numbersExponent;
+//
+//        System.out.println("Enter the number to root: ");
+//        numberToSquare = scnr.nextInt();
+//
+//        System.out.println("Enter the exponent: ");
+//        numbersExponent = scnr.nextInt();
+//
+//        return Math.sqrt(numberToSquare);
+//    }
+
     public static double powerOf(Scanner scnr) {
         double baseNumber;
         int ofPower;
@@ -60,37 +74,11 @@ public class Main {
         System.out.println("Please enter value for \"C\": ");
         c = scnr.nextDouble();
 
-        xOne = quadraticFormulaTopEquationPlus(a, b, c) / (2 * a);
-        xTwo = quadraticFormulaTopEquationNegative(a, b, c)  / (2 * a);
+        xOne = ((b * -1) + (Math.sqrt((b*b) - (4* a * c)))) / (2 * a);
+        xTwo = ((b * -1) - (Math.sqrt((b*b) - (4* a * c)))) / (2 * a);
 
-        System.out.println("x\u2081 = " + xOne);
-        System.out.println("x\u2082 = " + xTwo);
-    }
-
-    public static double quadraticFormulaTopEquationPlus(double a, double b, double c) {
-        double firstHalf;
-        double secondHalf;
-        double totalPlus;
-
-        firstHalf = (b * -1);
-        secondHalf = Math.sqrt((b*b) - (4* a * c));
-
-        totalPlus = firstHalf + secondHalf;
-
-        return totalPlus;
-    }
-
-    public static double quadraticFormulaTopEquationNegative(double a, double b, double c) {
-        double firstHalf;
-        double secondHalf;
-        double totalNegative;
-
-        firstHalf = (b * -1);
-        secondHalf = Math.sqrt((b*b) - (4* a * c));
-
-        totalNegative = firstHalf - secondHalf;
-
-        return totalNegative;
+        System.out.println("x₁ = " + xOne);
+        System.out.println("x₂ = " + xTwo);
     }
 
     public static double calculations(char equation, double numberOne, double numberTwo ) {
@@ -116,26 +104,27 @@ public class Main {
         Scanner scnr = new Scanner(System.in);
         double calcNumTwo;
         char parameter = ' ';
-        String needComplexNum;
+        char needComplexNum;
         double currentTotal;
 
-        System.out.println("Are you needing a complex number? (eg. square root): Yes/No");
-        needComplexNum = scnr.nextLine().toLowerCase();
+        System.out.println("Are you needing a complex equation? [Y]es/[N]o");
+        needComplexNum = scnr.next().toLowerCase().charAt(0);
 
-        if (needComplexNum.equals("yes")) {
-            String complexProcess;
-            System.out.println("Currently square root and \"power of\" is available (sqrt / powr / quadratic): ");
-            complexProcess = scnr.nextLine().toLowerCase();
+        if (needComplexNum == 'y') {
+            char complexProcess;
+            System.out.println("Please choose: ([S]quare Root / [P]ower Of / [Q]uadratic): ");
+            complexProcess = scnr.next().toLowerCase().charAt(0);
 
             switch (complexProcess) {
-                case "sqrt":
+                case 's':
                     System.out.println("The square root is: " + squareRootMethod(scnr));
                     break;
-                case "powr":
+                case 'p':
                     System.out.println("Total is: " + powerOf(scnr));
                     break;
-                case "quadratic":
+                case 'q':
                     quadraticFormula(scnr);
+                    break;
                 }
         } else {
 
@@ -169,5 +158,3 @@ public class Main {
         }
     }
 }
-
-
